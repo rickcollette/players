@@ -1,0 +1,65 @@
+{% extends 'players/base.html'%}
+
+{% block title %}Games - AayGames{% endblock %}
+
+{% block content %}
+    {% load filters %}
+    <a class="btn btn-secondary" href="{% url 'add_game' %}" style="float: right;"> + Add New</a>
+    <br>
+    <br>
+    <table class="table table-borderless table-hover">
+        {% for game in games %}
+            {% if forloop.counter|divisibleby:'4' or forloop.first %}
+                <tr>
+            {% endif %}
+            <td class='table-hover'>
+                <div class="card">
+                    <img class="card-img-top" src="/{{ MEDIA_URL }}{{ game.image }}"
+                    alt="{{ game.name }}">
+                    <div class="card-body">
+                        <b>{{ game.name }}</b>
+                        <hr>
+                        {{ game.desc }}
+                    </div>
+                </div>
+            </td>
+            {% if forloop.counter|divisibleby:'4' or forloop.last %}
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+    <!-- Pagination -->
+
+    {% if games.has_other_pages %}
+    <br>
+        <nav>
+            <ul class="pagination justify-content-end">
+                {% if games.has_previous %}
+                    <li class="page-item"><a class="page-link" 
+                        href="?page={{ games.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a href="#" class="page-link">&laquo;</a></li>
+                {% endif %}
+
+                {% for i in games.paginator.page_range %}
+                    {% if games.number == i %}
+                        <li class="active page-item"><a href="#" class="page-link">{{ i }}
+                            <span class="sr-only">(current)</span></a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if games.has_next %}
+                    <li class="page-item"><a class="page-link" 
+                        href="?page={{ games.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a href="#" class="page-link">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+
+{% endblock %}
+        

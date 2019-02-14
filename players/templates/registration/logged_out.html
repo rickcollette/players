@@ -1,0 +1,14 @@
+{% extends 'players/base.html' %}
+
+{% block title %}Logged out successfully{% endblock %}
+
+{% block content %}
+
+<div class="alert alert-info">
+    <div class="alert-body">
+        <p>You are successfully logged out. To login again, <a href="{% url 'login' %}" class="alert-link">
+            click here</a></p>
+    </div>
+</div>
+
+{% endblock %}

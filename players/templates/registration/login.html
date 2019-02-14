@@ -1,0 +1,46 @@
+{% extends 'players/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    {% if next %}
+        <div class="alert alert-danger">
+            {% if user.is_authenticated %}
+                <p>Your account does not have the permission to access this page!</p>
+            {% else %}
+                <p>You must login to continue!</p>
+            {% endif %}
+        </div>
+    {% endif %}
+    
+    {% if user.is_authenticated %}
+        <div class="alert alert-danger">
+            <p>You're already logged in as {{ user.username }}. To login with a different account you must logout. 
+                <a href="{% url 'logout' %}" class="alert-link">Click here</a> to logout.
+            </p>
+        </div>
+    {% else %}
+        <div class="card">
+            <div class="card-header">Login</div>
+            <div class="card-body">
+                <form action="" method="post" novalidate>
+                    <table class="table table-borderless">
+                        {{ form }}
+                    </table>
+                       {% csrf_token %}
+                 <input type="submit" value="Login" class="btn btn-success">
+                </form>
+                <hr>
+                <a href="{% url 'password_reset' %}" style="float: right; 
+                    font-size:small">Forgot Password?</a>
+                <br>
+                <div class="text-center text-secondary" style="font-size:small">
+                    New to AayGames? <a href="{% url 'user_register' %}">Sign up!</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

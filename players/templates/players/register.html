@@ -1,0 +1,45 @@
+{% extends 'players/base.html' %}
+{% block title %}Register New User{% endblock %}
+
+{% block content %}
+{% load filters %}
+{% if user.is_authenticated %}
+    <div class="alert alert-danger">
+        <p>You're already logged in as <b>{{ user.username }}</b>. To create a new account you must logout first. 
+            <a href="{% url 'logout' %}" class="alert-link">Click here</a> to logout.
+        </p>
+    </div>
+{% else %}
+    <div class="card">
+        <div class="card-body">
+            {% if success == 'true' %}
+                    <p class="text-success">Data Submitted Successfully!</p>
+            
+            {% else %}
+                <p class="text-secondary">Please enter your details below to register.</p>    
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table class="table table-borderless">
+                        {% for field in form %}
+                        <div class="form-group">
+                            <tr {% if field.errors %}class="table-warning"{% endif %}>
+                                <td><b>{{ field.label }}</b></td>
+                                <td>{{ field|add_class:'form-control' }}</td>                                
+                                <td>{{ field.errors }}</td>
+                            </tr>
+                        </div>
+                        {% endfor %}  
+                      </table>
+                    <input type="submit" value="Submit" class="align-center btn btn-success">
+                </form>
+                <br>
+                <div class="text-right text-secondary" style="font-size:small">
+                    Already a member? <a href="{% url 'login' %}">Login</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css"/>
+    <!-- <link rel="stylesheet" href="{{ STATIC_URL }}my/style.css"/> -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+{% include 'players/navbar.html' %}
+<div class = 'container'>
+    {% load filters %}
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends 'players/base.html' %}
+
+{% block title %}Players - AayGames{% endblock %}
+
+<!--Players List-->
+
+{% block content %}
+    <div class="container">
+        {% for player in users %}
+            <div class="row">
+                <div class="col">  
+                    <div class="card">
+                        <div class="card-body">
+                            <b>{{ player.username }}</b>
+                            <br>
+                            {{ player.email }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+<!-- Pagination -->
+
+    {% if users.has_other_pages %}
+    <br>
+        <nav>
+            <ul class="pagination justify-content-end">
+                {% if users.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a href="#" class="page-link">&laquo;</a></li>
+                {% endif %}
+
+                {% for i in users.paginator.page_range %}
+                    {% if users.number == i %}
+                        <li class="active page-item"><a href="#" class="page-link">{{ i }}<span class="sr-only">(current)</span></a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if users.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a href="#" class="page-link">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+
+{% endblock %}

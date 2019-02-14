@@ -1,0 +1,24 @@
+{% extends 'players/base.html' %}
+
+{% block title %}AayGames{% endblock %}
+
+{% block content %}
+
+{% if user_list %}
+    {% load filters %}
+    <h2>Users</h2>
+    
+    <ul>
+        {% for user in user_list %}
+        <li>
+            <a href="{{ user.id }}">{{ user.username }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% else %}
+    <b>No players to show!</b>
+{% endif %}
+
+{% endblock %}
+
