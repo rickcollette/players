@@ -9,4 +9,4 @@ The project is intended to be a social network for gamers with a focus on making
     python manage.py migrate
     python manage.py collectstatic
     python manage.py runserver
-    ```
+```
