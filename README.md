@@ -3,7 +3,7 @@ This project is intended to be a social network for gamers with a focus on makin
 
 # To quickly run it locally
 ``` 
-    git clone (https://github.com/DarkNinja3/players.git)
+    git clone [https://github.com/DarkNinja3/players.git](https://github.com/DarkNinja3/players.git)
     pip install -r requirements.txt
     cd players
     python manage.py migrate
